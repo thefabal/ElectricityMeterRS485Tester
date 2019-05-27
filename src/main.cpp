@@ -12,7 +12,8 @@
 const int buttonPin = 14;
 const int ledPin = 5;
 const int enablePin = 15;
-const int lcdLightPin = 12;
+const int lcdLightPin = 27;
+const int rs485EnablePin = 12;
 
 bool invert = false;
 
@@ -46,9 +47,11 @@ void setup() {
   pinMode(ledPin, OUTPUT);
   pinMode(enablePin, OUTPUT);
   pinMode(lcdLightPin, OUTPUT);
+  pinMode(rs485EnablePin, OUTPUT);
 
   digitalWrite(ledPin, HIGH);
   digitalWrite(lcdLightPin, HIGH);
+  digitalWrite(rs485EnablePin, HIGH);
 
   esp_sleep_enable_ext0_wakeup((gpio_num_t)buttonPin, LOW);
 
@@ -400,6 +403,7 @@ void loop() {
     lcd.noDisplay();
 
     digitalWrite(lcdLightPin, LOW);
+    digitalWrite(rs485EnablePin, LOW);
     esp_deep_sleep_start();
   }
 }
